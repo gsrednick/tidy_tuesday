@@ -6,5 +6,4 @@
 # commit is like saving instantaneously commit often; push occasionally 
 # can revert to go back to most recently commited version
 
-
-## blah blah blah
+# rule of thumb - when working with collaborators make sure to pull once per day and be careful about pushing to avoid conflicting copies
