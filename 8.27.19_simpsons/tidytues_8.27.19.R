@@ -2,7 +2,7 @@
 
 ## Notes 
 # to make a new folder directly in terminal : "  mkdir 8_27_19  "
-
+# make a folder for data, another for analyses, another for figures
 # commit is like saving instantaneously commit often; push occasionally 
 # can revert to go back to most recently commited version
 
