@@ -13,6 +13,8 @@
 library(tidyverse)
 library(cowplot)
 library(magick)
+library(ggpubr)
+library(jpeg)
 
 # Read data ####
 simpsons <- readr::read_delim("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-08-27/simpsons-guests.csv", delim = "|", quote = "")
@@ -34,19 +36,24 @@ q1 <- simpsons %>% group_by(season) %>% tally()
 
 q1$season<-as.numeric(q1$season)
 
+
+
+# background image
+url <- "https://static-media.fxx.com/img/FX_Networks_-_FXX/193/318/Simpsons_16_20_P3_640x360_287937091531.jpg"
+download.file(url, destfile = "rabbduck.jpg")
+img <- readJPEG("rabbduck.jpg")
+
 # plot 
+
 fig<- ggplot(q1, aes(x = season, y = n)) +
+  background_image(img) + 
+  #theme(panel.background = element_rect(colour = grey, alpha = 0.1)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) + 
-  annotate("text", x = 10, y = 25, label = "italic(R) ^ 2 == 0.25",parse = TRUE) +
-  annotate("text", x = 10, y = 22, label = "P == 0.005",parse = TRUE) +
-  labs(x ="Season", y = "no. of guest starts per season")
-  
+  annotate("text", x = 20, y = 25, label = "italic(R) ^ 2 == 0.25",parse = TRUE) +
+  annotate("text", x = 20, y = 22, label = "P == 0.005",parse = TRUE) +
+  labs(x ="Season", y = "no. of guest starts per season") 
 
-
-ggdraw() +
-  draw_image("https://static-media.fxx.com/img/FX_Networks_-_FXX/193/318/Simpsons_16_20_P3_640x360_287937091531.jpg") +
-  draw_plot(fig)
 
 
 
